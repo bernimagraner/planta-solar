@@ -33,3 +33,7 @@ reports/
 # Configuración de IDE
 .vscode/
 .idea/
+
+# Configuración específica de Cursor
+.cursor/
+.cursorrules

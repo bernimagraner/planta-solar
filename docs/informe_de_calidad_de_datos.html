@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informe Ejecutivo de Calidad de Datos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg: #fafaf9;
+      --color-surface: #ffffff;
+      --color-text: #1c1917;
+      --color-text-muted: #57534e;
+      --color-accent: #0f766e;
+      --color-accent-light: #ccfbf1;
+      --color-border: #e7e5e4;
+      --color-high: #b91c1c;
+      --color-medium: #b45309;
+      --color-low: #15803d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--color-text);
+      background: var(--color-bg);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    header {
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--color-text);
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    ul, ol {
+      margin: 1rem 0 1.5rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    li ul {
+      margin: 0.4rem 0 0 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0 1.5rem;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 0.65rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--color-text-muted);
+      background: var(--color-bg);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    tr:hover td {
+      background: rgba(15, 118, 110, 0.03);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 3px;
+    }
+
+    .badge-alta { background: #fef2f2; color: var(--color-high); }
+    .badge-media { background: #fffbeb; color: var(--color-medium); }
+    .badge-baja { background: #f0fdf4; color: var(--color-low); }
+
+    .conclusion-box {
+      background: var(--color-accent-light);
+      border-left: 4px solid var(--color-accent);
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+    }
+
+    code {
+      font-family: 'Inter', ui-monospace, monospace;
+      font-size: 0.88em;
+      background: var(--color-border);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    .meta {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Informe Ejecutivo de Calidad de Datos</h1>
+      <p class="subtitle">Proyecto: Análisis de Planta Solar · Febrero 2025</p>
+      <p class="subtitle">Ámbito: Datos de generación y sensores meteorológicos — Planta 1 y Planta 2</p>
+    </header>
+
+    <h2>1. Resumen Ejecutivo</h2>
+    <p>El presente informe recoge las conclusiones del análisis de calidad de datos realizado sobre los cuatro conjuntos de datos del proyecto de planta solar. Los hallazgos principales indican <strong>irregularidades en las series temporales</strong> y <strong>discrepancias en la cobertura de fechas</strong> entre los distintos datasets, así como <strong>un error de escala detectado y corregido</strong> en los datos de generación de la Planta 1.</p>
+
+    <h2>2. Fuentes de Datos Analizadas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>Descripción</th>
+          <th>Registros</th>
+          <th>Período</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>P1G</strong></td><td>Planta 1 - Generación (inversores)</td><td>68.778</td><td>15/05/2020 - 17/06/2020</td></tr>
+        <tr><td><strong>P2G</strong></td><td>Planta 2 - Generación (inversores)</td><td>67.698</td><td>15/05/2020 - 17/06/2020</td></tr>
+        <tr><td><strong>P1S</strong></td><td>Planta 1 - Sensores meteorológicos</td><td>3.182</td><td>15/05/2020 - 17/06/2020</td></tr>
+        <tr><td><strong>P2S</strong></td><td>Planta 2 - Sensores meteorológicos</td><td>3.259</td><td>15/05/2020 - 17/06/2020</td></tr>
+      </tbody>
+    </table>
+
+    <h2>3. Hallazgos Principales</h2>
+
+    <h3>3.1 Regularidad de las Series Temporales</h3>
+    <div class="conclusion-box">
+      <strong>Conclusión:</strong> Ninguna de las cuatro series temporales es estrictamente regular.
+    </div>
+    <ul>
+      <li><strong>Intervalo base:</strong> 15 minutos en todos los datasets.</li>
+      <li><strong>Problemas detectados:</strong>
+        <ul>
+          <li><strong>P1G:</strong> 9 intervalos diferentes entre fechas (p. ej. 15 min, 30 min, 1 h, 3 h, 4h15min, etc.).</li>
+          <li><strong>P2G:</strong> 5 saltos con intervalos distintos al estándar de 15 minutos.</li>
+          <li><strong>P1S:</strong> 8 intervalos irregulares detectados.</li>
+          <li><strong>P2S:</strong> Serie con irregularidades en los intervalos.</li>
+        </ul>
+      </li>
+    </ul>
+    <p><strong>Impacto:</strong> Los huecos y saltos en el tiempo pueden afectar a análisis temporales y modelado predictivo. Se recomienda rellenar o tratar explícitamente los intervalos faltantes.</p>
+
+    <h3>3.2 Cobertura y Alineación de Fechas</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>Fechas únicas</th>
+          <th>¿Mismas fechas que el resto?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>P1G</td><td>3.158</td><td>No</td></tr>
+        <tr><td>P2G</td><td>3.259</td><td>No</td></tr>
+        <tr><td>P1S</td><td>3.182</td><td>No</td></tr>
+        <tr><td>P2S</td><td>3.259</td><td>No</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Conclusión:</strong> Los cuatro datasets <strong>no comparten exactamente las mismas fechas</strong>. Existen fechas presentes en unos conjuntos y ausentes en otros, lo que obliga a una estrategia de alineación antes de cualquier análisis conjunto o modelado.</p>
+
+    <h3>3.3 Rango Temporal</h3>
+    <p>Todos los datasets comparten el mismo rango de fechas:</p>
+    <ul>
+      <li><strong>Inicio:</strong> 15 de mayo de 2020, 00:00</li>
+      <li><strong>Fin:</strong> 17 de junio de 2020, 23:45</li>
+    </ul>
+    <p><strong>Conclusión:</strong> Aunque el rango global coincide, la cobertura interna difiere entre datasets.</p>
+
+    <h2>4. Error de Calidad Corregido</h2>
+    <h3>Potencia DC – Planta 1 (P1G)</h3>
+    <p><strong>Problema detectado:</strong> Los valores de <code>potencia_dc_kw</code> en la Planta 1 aparecían multiplicados por 10 respecto a valores esperados.</p>
+    <p><strong>Acción tomada:</strong> División de la columna entre 10 para corregir la escala.</p>
+    <p><strong>Evidencia:</strong> Comparación con <code>potencia_ac_kw</code> y patrones esperables en instalaciones fotovoltaicas.</p>
+
+    <h2>5. Insights Clave</h2>
+    <ol>
+      <li><strong>Serie temporal no regular:</strong> Los huecos y saltos sugieren posibles fallos de medición, mantenimiento o desconexiones. Conviene documentar su origen para interpretar mejor los datos.</li>
+      <li><strong>Heterogeneidad entre plantas:</strong> P1 y P2 tienen distinta cobertura de fechas (3.158 vs 3.259 fechas únicas), lo que implica diferencias operativas o de disponibilidad de datos.</li>
+      <li><strong>Sensores vs. generación:</strong> Los datasets de sensores (P1S, P2S) tienen una fecha por fila; los de generación (P1G, P2G) agrupan varios inversores por misma fecha, aumentando el volumen de filas.</li>
+      <li><strong>Formato de fechas:</strong> Se detectaron diferencias de formato (p. ej. dd-mm-yyyy vs. yyyy-mm-dd) que requieren conversión explícita a datetime para operaciones correctas.</li>
+      <li><strong>Identificadores:</strong> Los <code>id_planta</code> originales (4135001, 4136001) se han sustituido por códigos más legibles (p1, p2) para facilitar el análisis.</li>
+    </ol>
+
+    <h2>6. Recomendaciones</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Prioridad</th>
+          <th>Recomendación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge badge-alta">Alta</span></td>
+          <td>Definir una malla temporal de referencia (p. ej. cada 15 minutos) y alinear todos los datasets mediante reindexado o merge.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-alta">Alta</span></td>
+          <td>Documentar las fechas o períodos con huecos o intervalos irregulares y contrastarlos con registros de mantenimiento o incidencias.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-media">Media</span></td>
+          <td>Validar la corrección de <code>potencia_dc_kw</code> en P1G con datos históricos o de referencia cuando estén disponibles.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-media">Media</span></td>
+          <td>Homogeneizar el formato de fechas en origen para evitar errores de conversión.</td>
+        </tr>
+        <tr>
+          <td><span class="badge badge-baja">Baja</span></td>
+          <td>Revisar la integridad de <code>energia_total_kwh</code> y su relación con <code>energia_diaria_kwh</code> para detectar posibles inconsistencias.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>7. Conclusión Final</h2>
+    <p>La calidad de los datos es <strong>aceptable para análisis exploratorio y modelado</strong>, siempre que se apliquen las correcciones y alineaciones descritas. Las principales limitaciones son:</p>
+    <ul>
+      <li>Irregularidades en las series temporales</li>
+      <li>Fechas no coincidentes entre datasets</li>
+      <li>Error de escala corregido en potencia DC de la Planta 1</li>
+    </ul>
+    <p>Con una estrategia adecuada de preprocesamiento temporal y alineación, los datos pueden utilizarse con confianza para análisis de rendimiento, predicción de generación e integración de variables meteorológicas y de generación.</p>
+
+    <p class="meta">Documento generado a partir del análisis realizado en el notebook <code>01_importacion_datos.ipynb</code>.</p>
+  </div>
+</body>
+</html>
