@@ -1,0 +1,2 @@
+#ENTORNO CONDA
+conda actívate C:\Users\Usuario\miniconda3\envs\caso2-plantas-solares
