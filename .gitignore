@@ -23,9 +23,6 @@ datos/
 *.sqlite
 *.duckdb
 
-# Entregables
-entregables/
-reports/
 
 # Archivos de log
 *.log
